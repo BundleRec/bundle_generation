@@ -40,6 +40,27 @@ python run.py --dataset electronic
 ```
 This command will initiate the experiment, and the results for each step will be saved in the `temp/` folder.
 
+<!-- ### Cite
+
+Please cite the following papers if you use **our code** in a research paper:
+
+```
+@inproceedings{sun2022revisiting,
+  title={Revisiting Bundle Recommendation: Datasets, Tasks, Challenges and Opportunities for Intent-Aware Product Bundling},
+  author={Sun, Zhu and Yang, Jie and Feng, Kaidong and Fang, Hui and Qu, Xinghua and Ong, Yew Soon},
+  booktitle={Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  year={2022}
+}
+
+@article{sun2024revisiting,
+  title={Revisiting Bundle Recommendation for Intent-aware Product Bundling},
+  author={Sun, Zhu and Feng, Kaidong and Yang, Jie and Fang, Hui and Qu, Xinghua and Ong, Yew-Soon and Liu, Wenyuan},
+  journal={ACM Transactions on Recommender Systems},
+  year={2024},
+  publisher={ACM New York, NY}
+}
+``` -->
+
 
 ### License
 
