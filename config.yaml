@@ -1,0 +1,22 @@
+
+dataset: 'electronic'
+data_path: 'data/'
+log_path: 'log/process.log'
+temp_path: 'temp/'
+
+
+model: 'gpt-3.5-turbo'
+api_key: ''
+temperature: 0.
+feedback_iteration: 4
+rater:
+  - 'openai':
+      model: 'gpt-3.5-turbo'
+      temperature: 0.
+      api_key: ''
+
+  - 'claude':
+      model: 'claude-2'
+      temperature: 0.
+      api_key: ''
+
