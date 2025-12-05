@@ -6,28 +6,34 @@ def compute(session_item, session_bundle, predictions):
     session_recall = 0
     coverage_item = 0
     all_hitted_bundle = 0
+    invalid_id = []
     for test_id, pred in predictions.items():
+        all_bundle = session_bundle[test_id]
+        all_item = session_item[test_id].split(',')
+        hitted_bundle = 0
+        recall_hitted = 0
         if len(pred) == 0:
             continue
-        all_items =  session_item[test_id].split(',')
-        all_bundle = session_bundle[test_id]
-        hitted_bundle = 0
-        for bid, content in pred.items():
-            try:
-                reidx_items = set([all_items[int(i[-1])-1] for i in content])
-            except Exception as e:
-                print(test_id)
-            for bundle in all_bundle:
-                bundle_list = set(bundle[-1].split(','))
-                if reidx_items <= bundle_list: 
+        for truth_bundle in all_bundle:
+            bundle_list = set(truth_bundle[-1].split(','))
+            hitted_list = []
+            for bid, content in pred.items():
+                try:
+                    reidx_items = set([all_item[int(i[-1])-1] for i in content])
+                except Exception:
+                    invalid_id.append(test_id)
+                    continue
+                if reidx_items <= bundle_list:
                     hitted_bundle += 1
-                    union_items = len(bundle_list & reidx_items)
-                    coverage_item += union_items / len(bundle_list)
+                    hitted_list.append(reidx_items)
                     all_hitted_bundle += 1
-                    break
+                    coverage_item += len(reidx_items & bundle_list) / len(bundle_list)
+            if len(hitted_list) > 0:
+                recall_hitted += 1
+
         session_precision += hitted_bundle / len(pred)
-        session_recall += hitted_bundle / len(all_bundle)
-    
+        session_recall += recall_hitted / len(all_bundle)
+
     session_precision /= len(predictions)
     session_recall /= len(predictions)
     coverage = coverage_item / all_hitted_bundle
